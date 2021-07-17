@@ -1,13 +1,15 @@
 import React from 'react'
+import gql from 'graphql-tag'
+import {useQuery} from '@apollo/client'
+import {withProvider} from '../graphqlProvider'
 
-const data = {
-  books: [
-    {
-      id: '1',
-      title: 'The Rails Way 5',
-    },
-  ],
-}
+const booksQuery = gql`
+  query allBooks {
+    books {
+      title
+    }
+  }
+`
 
 const loading = false
 const Book: React.FunctionComponent = ({title}) => {
@@ -15,6 +17,7 @@ const Book: React.FunctionComponent = ({title}) => {
 }
 
 const Books = () => {
+  const {data, loading, error} = useQuery(booksQuery)
   if (loading) {
     return <span>"Loading..."</span>
   }
@@ -30,4 +33,4 @@ const Books = () => {
   )
 }
 
-export default Books
+export default withProvider(Books)
