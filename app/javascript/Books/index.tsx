@@ -4,7 +4,7 @@ const data = {
   books: [
     {
       id: '1',
-      title: 'Active Rails',
+      title: 'The Rails Way 5',
     },
   ],
 }
